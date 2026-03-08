@@ -1,7 +1,4 @@
 # cv-devops-lab
-Personal DevOps lab: self-hosted Debian server, Docker, Nginx, Cloudflare Tunnel, CV website and future AI integration 
-
-# cv-devops-lab
 
 Personal DevOps lab running on a self-hosted Debian server.
 
