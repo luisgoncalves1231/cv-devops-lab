@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luis Goncalves — CV</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0a0a0f; --surface: #13131a; --card: #1a1a24; --border: #2a2a3a;
+    --accent-blue: #4f8ef7; --accent-cyan: #00d4c8; --accent-orange: #ff6b35;
+    --accent-purple: #9b6dff; --text: #f0f0f5; --text-muted: #7a7a9a; --text-dim: #4a4a6a;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: linear-gradient(rgba(79,142,247,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(79,142,247,0.03) 1px, transparent 1px);
+    background-size: 60px 60px; pointer-events: none; z-index: 0;
+  }
+  .orb { position: fixed; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0; opacity: 0.15; }
+  .orb-1 { width: 600px; height: 600px; background: var(--accent-blue); top: -200px; right: -200px; }
+  .orb-2 { width: 400px; height: 400px; background: var(--accent-cyan); bottom: 10%; left: -100px; }
+  .orb-3 { width: 300px; height: 300px; background: var(--accent-purple); top: 50%; right: 10%; }
+  .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 16px 24px; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(10,10,15,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--accent-cyan); letter-spacing: -0.5px; }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent-cyan); }
+  .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; }
+  .hero-inner { display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: center; width: 100%; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.3);
+    border-radius: 100px; padding: 6px 16px; font-size: 0.75rem; color: var(--accent-blue);
+    letter-spacing: 1px; text-transform: uppercase; font-weight: 500; margin-bottom: 24px;
+  }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-cyan); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+  .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; line-height: 1.05; letter-spacing: -2px; margin-bottom: 8px; }
+  .hero h1 span { background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero-subtitle { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 32px; font-weight: 300; max-width: 480px; }
+  .hero-subtitle strong { color: var(--text); font-weight: 500; }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500; text-decoration: none; cursor: pointer; border: none; transition: all 0.2s; }
+  .btn-primary { background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan)); color: #000; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(79,142,247,0.4); }
+  .btn-whatsapp { background: linear-gradient(135deg, #25d366, #128c7e); color: #fff; }
+  .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(37,211,102,0.4); }
+  .hero-photo { width: 200px; height: 200px; border-radius: 24px; overflow: hidden; position: relative; flex-shrink: 0; }
+  .photo-placeholder { width: 100%; height: 100%; background: var(--card); border-radius: 22px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; border: 2px solid var(--border); }
+  .photo-placeholder .initials { font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .photo-placeholder span { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+  .contact-bar { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .contact-item { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .contact-item:hover { color: var(--accent-cyan); }
+  .contact-item svg { color: var(--accent-cyan); flex-shrink: 0; }
+  section { padding: 100px 0; }
+  .section-label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--accent-cyan); font-weight: 600; margin-bottom: 12px; }
+  .section-title { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; letter-spacing: -1px; margin-bottom: 48px; line-height: 1.1; }
+  .tabs { display: flex; gap: 4px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 4px; width: fit-content; margin-bottom: 48px; }
+  .tab { padding: 10px 24px; border-radius: 8px; font-size: 0.85rem; font-weight: 500; cursor: pointer; border: none; background: transparent; color: var(--text-muted); font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
+  .tab.active { background: var(--card); color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  .timeline { position: relative; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--accent-blue), transparent); }
+  .timeline-item { padding-left: 32px; margin-bottom: 48px; position: relative; animation: fadeInUp 0.5s ease both; }
+  .timeline-item::before { content: ''; position: absolute; left: -4px; top: 8px; width: 9px; height: 9px; border-radius: 50%; background: var(--accent-cyan); box-shadow: 0 0 12px var(--accent-cyan); }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .timeline-date { font-size: 0.75rem; color: var(--accent-blue); font-weight: 500; letter-spacing: 0.5px; margin-bottom: 6px; text-transform: uppercase; }
+  .timeline-role { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 2px; }
+  .timeline-company { font-size: 0.85rem; color: var(--accent-cyan); margin-bottom: 12px; font-weight: 500; }
+  .timeline-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .skill-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; transition: all 0.2s; position: relative; overflow: hidden; }
+  .skill-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan)); transform: scaleX(0); transition: transform 0.3s; }
+  .skill-card:hover { border-color: rgba(79,142,247,0.4); transform: translateY(-2px); }
+  .skill-card:hover::before { transform: scaleX(1); }
+  .skill-card-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-dim); margin-bottom: 8px; }
+  .skill-card-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 8px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { padding: 3px 10px; border-radius: 100px; font-size: 0.72rem; font-weight: 500; border: 1px solid; }
+  .tag-blue   { background: rgba(79,142,247,0.1);  color: var(--accent-blue);   border-color: rgba(79,142,247,0.3); }
+  .tag-cyan   { background: rgba(0,212,200,0.1);   color: var(--accent-cyan);   border-color: rgba(0,212,200,0.3); }
+  .tag-orange { background: rgba(255,107,53,0.1);  color: var(--accent-orange); border-color: rgba(255,107,53,0.3); }
+  .tag-purple { background: rgba(155,109,255,0.1); color: var(--accent-purple); border-color: rgba(155,109,255,0.3); }
+  .devops-highlight { background: linear-gradient(135deg, rgba(79,142,247,0.08), rgba(0,212,200,0.05)); border: 1px solid rgba(79,142,247,0.2); border-radius: 16px; padding: 32px; margin-bottom: 48px; }
+  .devops-highlight h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--accent-cyan); }
+  .devops-highlight p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+  .arch-block { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; font-family: 'Courier New', monospace; font-size: 0.8rem; color: var(--accent-cyan); line-height: 1.8; margin-top: 16px; }
+  .lang-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .lang-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+  .lang-name { font-family: 'Syne', sans-serif; font-weight: 700; margin-bottom: 4px; }
+  .lang-level { font-size: 0.8rem; color: var(--text-muted); }
+  .lang-bar { height: 3px; background: var(--border); border-radius: 2px; margin-top: 12px; overflow: hidden; }
+  .lang-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan)); }
+  .contact-links { display: flex; gap: 16px; flex-wrap: wrap; }
+  .contact-link { display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: 10px; background: var(--card); border: 1px solid var(--border); color: var(--text); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; }
+  .contact-link:hover { transform: translateY(-2px); border-color: var(--accent-cyan); color: var(--accent-cyan); }
+  .contact-link.whatsapp:hover { border-color: #25d366; color: #25d366; }
+  footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; }
+  .footer-text { font-size: 0.8rem; color: var(--text-dim); }
+  .footer-text span { color: var(--accent-cyan); }
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
+  @media (max-width: 640px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-photo { width: 140px; height: 140px; justify-self: start; order: -1; }
+    .nav-links { display: none; }
+    .lang-grid { grid-template-columns: 1fr 1fr; }
+    .contact-links { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<nav>
+  <div class="nav-logo">Luis Goncalves</div>
+  
+</nav>
+
+<section class="hero" id="about">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag">Available for opportunities</div>
+        <h1>Luis Angel<br><span>Goncalves</span></h1>
+        <p class="hero-subtitle"><strong>DevOps & IT enthusiast</strong> with hands-on experience in maintenance supervision, server administration, and self-hosted infrastructure.</p>
+        <div class="hero-ctas">
+          <a href="#experience" class="btn btn-primary">View Experience</a>
+          <a href="https://wa.me/13052183772" target="_blank" class="btn btn-whatsapp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+        <div class="contact-bar">
+          <a href="https://wa.me/13052183772" target="_blank" class="contact-item">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            305-218-3772
+          </a>
+          <a href="mailto:luisgoncalves1231@icloud.com" class="contact-item">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            luisgoncalves1231@icloud.com
+          </a>
+          <div class="contact-item">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Miami Beach, FL
+          </div>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <div class="photo-placeholder">
+          <span class="initials">LG</span>
+          <span>Add photo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="experience">
+  <div class="container">
+    <div class="section-label">Background</div>
+    <h2 class="section-title">Work Experience</h2>
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('maintenance')">Maintenance</button>
+      <button class="tab" onclick="switchTab('devops')">DevOps / IT</button>
+    </div>
+    <div class="tab-content active" id="tab-maintenance">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">Feb 2024 — Present</div>
+          <div class="timeline-role">Maintenance Technician</div>
+          <div class="timeline-company">SeaCoast 5151 Condominium — Miami Beach, FL</div>
+          <div class="timeline-desc">General building maintenance and repairs including drywall, painting, plumbing fixtures, doors, and tiles. HVAC inspection and troubleshooting. Replacement of electrical components, water leak detection, and preventive maintenance.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Nov 2022 — Dec 2023</div>
+          <div class="timeline-role">Engineering Supervisor</div>
+          <div class="timeline-company">Marenas Beach Resort — Miami Beach, FL</div>
+          <div class="timeline-desc">Supervised daily maintenance operations in a beachfront hotel. Advanced repairs in plumbing, electrical, drywall, and appliance systems. Preventive maintenance inspections for boilers, cooling towers, and alarm systems.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Apr 2022 — Nov 2022</div>
+          <div class="timeline-role">Houseman</div>
+          <div class="timeline-company">Marenas Beach Resort — Miami Beach, FL</div>
+          <div class="timeline-desc">Guest comfort and facility support. Promoted to Engineering Supervisor within 8 months.</div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content" id="tab-devops">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">2026 — Present</div>
+          <div class="timeline-role">Self-Hosted Infrastructure</div>
+          <div class="timeline-company">Personal Project — Debian Server (HP i3)</div>
+          <div class="timeline-desc">Deployed this CV website on a self-hosted Debian server using Docker and Nginx, publicly accessible via Cloudflare Tunnel without router access. Configured cloudflared as a systemd service. Set up MariaDB with persistent Docker volumes.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="skills">
+  <div class="container">
+    <div class="section-label">Capabilities</div>
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-label">DevOps</div>
+        <div class="skill-card-title">Infrastructure & Containers</div>
+        <div class="skill-tags">
+          <span class="tag tag-blue">Docker</span><span class="tag tag-blue">Docker Compose</span>
+          <span class="tag tag-cyan">Nginx</span><span class="tag tag-cyan">Cloudflare Tunnel</span>
+          <span class="tag tag-blue">Linux Debian</span><span class="tag tag-cyan">Systemd</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-label">Web Development</div>
+        <div class="skill-card-title">Frontend & Backend</div>
+        <div class="skill-tags">
+          <span class="tag tag-orange">HTML</span><span class="tag tag-orange">CSS</span>
+          <span class="tag tag-orange">JavaScript</span><span class="tag tag-orange">Bootstrap</span>
+          <span class="tag tag-orange">PHP</span><span class="tag tag-orange">SQL</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-label">Cybersecurity</div>
+        <div class="skill-card-title">Ethical Hacking & Analysis</div>
+        <div class="skill-tags">
+          <span class="tag tag-purple">Active Directory</span><span class="tag tag-purple">Kerberos</span>
+          <span class="tag tag-purple">Metasploit</span><span class="tag tag-purple">Nmap</span>
+          <span class="tag tag-purple">Wireshark</span><span class="tag tag-purple">Kali Linux</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-label">Maintenance</div>
+        <div class="skill-card-title">Building & HVAC Systems</div>
+        <div class="skill-tags">
+          <span class="tag tag-cyan">HVAC Troubleshooting</span><span class="tag tag-cyan">Electrical</span>
+          <span class="tag tag-cyan">Plumbing</span><span class="tag tag-cyan">Preventive Maintenance</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="devops">
+  <div class="container">
+    <div class="section-label">Live Project</div>
+    <h2 class="section-title">Self-Hosted CV Server</h2>
+    <div class="devops-highlight">
+      <h3>Architecture</h3>
+      <p>This website runs on a personal HP i3 Debian server with no router access, using Cloudflare Tunnel to serve traffic securely over HTTPS.</p>
+      <div class="arch-block">
+        Internet → luis-goncalves-cv.com (Cloudflare DNS)<br>
+        &nbsp;&nbsp;└── Cloudflare Tunnel (cloudflared as systemd service)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── Debian Server — HP i3<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── Docker → Nginx (port 8080)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── index.html (this page)
+      </div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-label">Infra</div>
+        <div class="skill-card-title">No router access required</div>
+        <div class="skill-tags"><span class="tag tag-cyan">Cloudflare Tunnel</span><span class="tag tag-blue">Zero Trust</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-label">Stack</div>
+        <div class="skill-card-title">Containerized deployment</div>
+        <div class="skill-tags"><span class="tag tag-blue">Docker</span><span class="tag tag-cyan">Nginx</span><span class="tag tag-orange">MariaDB</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-label">Reliability</div>
+        <div class="skill-card-title">Auto-restart on reboot</div>
+        <div class="skill-tags"><span class="tag tag-purple">Systemd service</span><span class="tag tag-blue">HTTPS auto</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="contact">
+  <div class="container">
+    <div class="section-label">Languages</div>
+    <h2 class="section-title">Communication</h2>
+    <div class="lang-grid" style="margin-bottom: 64px;">
+      <div class="lang-card">
+        <div class="lang-name">Spanish</div>
+        <div class="lang-level">Native</div>
+        <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-name">English</div>
+        <div class="lang-level">A2 — Basic</div>
+        <div class="lang-bar"><div class="lang-fill" style="width:30%"></div></div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-name">Portuguese</div>
+        <div class="lang-level">A1 — Basic</div>
+        <div class="lang-bar"><div class="lang-fill" style="width:15%"></div></div>
+      </div>
+    </div>
+    <div class="section-label">Get in touch</div>
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-links">
+      <a href="https://wa.me/13052183772" target="_blank" class="contact-link whatsapp">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp — 305-218-3772
+      </a>
+      <a href="mailto:luisgoncalves1231@icloud.com" class="contact-link">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        luisgoncalves1231@icloud.com
+      </a>
+      <a href="tel:+13052183772" class="contact-link">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call — 305-218-3772
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p class="footer-text">Self-hosted on a personal Debian server · <span>luis-goncalves-cv.com</span> · 2026</p>
+  </div>
+</footer>
+
+<script>
+  function switchTab(name) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>

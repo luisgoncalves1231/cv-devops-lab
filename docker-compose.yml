@@ -1,0 +1,11 @@
+# Levanta el servidor web del CV de Luis Goncalves
+services:
+  cv_web:
+    image: nginx:latest        # Imagen oficial de Nginx
+    container_name: cv_web     # Nombre fijo del contenedor
+    restart: unless-stopped    # Se reinicia solo si el servidor se reinicia
+    ports:
+      - "8080:80"              # Puerto del servidor -> puerto del contenedor
+    volumes:
+      - ./web_cv:/usr/share/nginx/html        # Tu HTML/CSS/JS -> Nginx
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf  # Tu config -> Nginx
