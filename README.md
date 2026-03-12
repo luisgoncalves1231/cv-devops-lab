@@ -2,7 +2,7 @@
 
 Personal DevOps lab running on a self-hosted Debian server.
 
-This project hosts my CV website and serves as a foundation for learning real-world infrastructure — containerized services, reverse proxy, Cloudflare tunneling, and future AI integrations.
+This project hosts my CV website and serves as a real-world infrastructure lab where I practice containerized services, reverse proxy configuration, Cloudflare tunneling, and AI integrations.
 
 ---
 
@@ -16,51 +16,104 @@ https://mermaid.live/edit#pako:eNpN0MFu4jAQBuBXseYMKZA0CTlUWgi0dFv20KqHxmhlkoF4m
 
 ## Stack
 
-| Layer           | Technology              |
-| --------------- | ----------------------- |
-| Server OS       | Debian Linux            |
-| Containers      | Docker + Docker Compose |
-| Web Server      | Nginx                   |
-| Tunnel          | Cloudflare Tunnel       |
-| HTTPS           | Cloudflare (automatic)  |
-| Frontend        | HTML + CSS + JS         |
-| Version Control | Git + GitHub            |
+| Layer | Technology |
+|------|-------------|
+| Server OS | Debian Linux |
+| Containers | Docker + Docker Compose |
+| Web Server | Nginx |
+| Backend API | FastAPI |
+| Tunnel | Cloudflare Tunnel |
+| HTTPS | Cloudflare |
+| Frontend | HTML + CSS + JavaScript |
+| AI Integration | OpenAI API |
+| Version Control | Git + GitHub |
 
 ---
 
 ## Project Structure
 
-```
 projects/
 
-├── cv_web/
-│   ├── docker-compose.yml
-│   ├── nginx/
-│   │   └── nginx.conf
-│   └── web/
-│       └── index.html
-│
-└── README.md
-```
+├── docker-compose.yml  
+│  
+├── cv_web/  
+│   ├── api/  
+│   │   ├── main.py  
+│   │   ├── Dockerfile  
+│   │   └── .env  
+│   │  
+│   ├── nginx/  
+│   │   └── nginx.conf  
+│   │  
+│   └── web/  
+│       ├── index.html  
+│       └── img.jpeg  
+│  
+└── README.md  
 
 ---
 
 ## How It Works
 
-The CV website runs inside a Docker container with Nginx serving the static site.
+The project runs two Docker containers.
 
-Traffic flows from the internet through Cloudflare DNS and a Cloudflare Tunnel — no open ports on the router required. HTTPS is handled automatically by Cloudflare.
+Web container:  
+Nginx serves the static CV website.
 
-The tunnel runs as a systemd service on the Debian server, meaning it starts automatically on reboot.
+API container:  
+A FastAPI backend provides the AI chatbot functionality.
+
+The chatbot communicates with the OpenAI API and answers questions about my experience, skills, and availability.
+
+---
+
+## Traffic Flow
+
+Internet  
+↓  
+Cloudflare DNS  
+↓  
+Cloudflare Tunnel (systemd service)  
+↓  
+Debian Server  
+↓  
+Docker Network  
+├── Nginx container (CV website)  
+└── FastAPI container (AI chatbot API)
+
+The router does not require any open ports.  
+All traffic is securely tunneled through Cloudflare.
+
+---
+
+## Chatbot
+
+The website includes a floating AI chatbot assistant.
+
+Features:
+
+- OpenAI powered responses  
+- Message rate limiting  
+- Input sanitization  
+- Fallback contact to WhatsApp  
+- Context-aware responses about my background and experience  
+
+The chatbot communicates with the FastAPI backend via:
+
+/api/chat
 
 ---
 
 ## Deployment
 
-```bash
-cd ~/projects/cv_web
-docker compose up -d
-```
+Start containers:
+
+cd ~/projects  
+docker compose up -d  
+
+Stop containers:
+
+docker compose down  
 
 The site is publicly accessible at:
 
@@ -68,21 +121,44 @@ https://luis-goncalves-cv.com
 
 ---
 
-## Planned Features
+## Security Considerations
 
-* Python backend API container (FastAPI)
-* AI chat assistant on the website (OpenAI API)
-* WhatsApp automation bot
-* Monitoring and logging
-* Separate frontend and backend services
-* CI/CD workflow with GitHub Actions
+Current protections:
+
+- Input sanitization  
+- Message rate limiting  
+- Container isolation via Docker network  
+- HTTPS via Cloudflare  
+- No open router ports  
+
+Future improvements:
+
+- Conversation logging (MariaDB)  
+- API rate limiting per IP  
+- Request validation middleware  
+- Monitoring and logging  
+
+---
+
+## Future Improvements
+
+- MariaDB database for chat logs  
+- Monitoring with Prometheus / Grafana  
+- CI/CD pipeline with GitHub Actions  
+- Infrastructure as Code experiments  
+- AI assistant improvements  
 
 ---
 
 ## Author
 
-Luis Gonçalves
-Junior DevOps / Backend Developer
-Based in Miami Beach, FL
+Luis Gonçalves  
+Junior DevOps / Backend Developer  
+Miami Beach, Florida
 
-Focused on Linux server administration, containerized infrastructure, backend development, and AI integrations.
+Focused on:
+
+- Linux server administration  
+- Containerized infrastructure  
+- Backend development  
+- AI integrations

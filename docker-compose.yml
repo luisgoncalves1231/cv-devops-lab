@@ -1,11 +1,33 @@
-# Levanta el servidor web del CV de Luis Goncalves
+version: "3.9"
+
 services:
+
+  # Servidor web que sirve el CV
   cv_web:
-    image: nginx:latest        # Imagen oficial de Nginx
-    container_name: cv_web     # Nombre fijo del contenedor
-    restart: unless-stopped    # Se reinicia solo si el servidor se reinicia
+    image: nginx:latest
+    container_name: cv_web
+    restart: unless-stopped
     ports:
-      - "8080:80"              # Puerto del servidor -> puerto del contenedor
+      - "8080:80"
     volumes:
-      - ./web_cv:/usr/share/nginx/html        # Tu HTML/CSS/JS -> Nginx
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf  # Tu config -> Nginx
+      - ./cv_web/web:/usr/share/nginx/html
+      - ./cv_web/nginx/nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - cv_network
+
+
+  # API del chatbot
+  api:
+    build: ./cv_web/api
+    container_name: cv_api
+    restart: unless-stopped
+    env_file:
+      - ./cv_web/api/.env
+    expose:
+      - "8000"
+    networks:
+      - cv_network
+
+
+networks:
+  cv_network:
