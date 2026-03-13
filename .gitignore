@@ -141,3 +141,7 @@ vite.config.ts.timestamp-*
 # Sensitive files
 cv_web/api/prompt.txt
 cv_web/api/__pycache__/
+
+# Python cache files
+__pycache__/
+*.pyc
